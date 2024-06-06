@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import { fetchAdminData } from '../src/utils/fetchs';
+import AsyncSelect from '../src/components/AsyncSelect';
 
 export default defineType({
     name: 'posts',
@@ -86,7 +87,16 @@ export default defineType({
             title: 'createdBy',
             type: 'string',
             options: {
-                list: (await fetchAdminData()).map(({ title, value }) => ({ title, value }))
+                list: [],
+                url: 'http://localhost:3000/v1/users/getAdmins',
+                formatResponse: (json: { id: string, name: string }[]) =>
+                    json.map(({ id, name }) => ({
+                        title: name,
+                        value: id,
+                    })),
+            },
+            components: {
+                input: AsyncSelect
             }
         }),
         defineField({

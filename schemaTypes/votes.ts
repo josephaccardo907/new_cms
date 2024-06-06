@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity'
-import AuthorSelect from '../src/components/AuthorSelect'
+import AuthorSelect from '../src/components/AsyncSelect'
 
 
 export default defineType({
